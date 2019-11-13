@@ -1,0 +1,3 @@
+# dependencies  npm°üÎÄ¼ş
+/node_modules
+
