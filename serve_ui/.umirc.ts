@@ -6,9 +6,10 @@ const config: IConfig =  {
   routes: [
     {
       path: '/',
-      component: '../layouts/login/index',
+      component: '../layouts/index',
       routes: [
-        { path: '/', component: '../pages/index' }
+        { path: '/', component: '../pages/index' },
+        { path: '/login', component: '../pages/login/index' },
       ]
     }
   ],
