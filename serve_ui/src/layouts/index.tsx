@@ -5,10 +5,8 @@ import { RouteComponentProps } from "react-router-dom"
 
 const BasicLayout: React.FC<RouteComponentProps> = props => {
   
-  if ( props.location.pathname === '/login/') {
-
+  if ( props.location.pathname.indexOf('/login') > -1 ) {
     return <LoginLayout>{props.children}</LoginLayout>
-
   }
 
   return (

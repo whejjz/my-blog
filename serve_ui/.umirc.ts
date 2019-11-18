@@ -1,18 +1,9 @@
 import { IConfig } from 'umi-types';
+import { resolve } from 'path'
 
 // ref: https://umijs.org/config/
 const config: IConfig =  {
   treeShaking: true,
-  routes: [
-    {
-      path: '/',
-      component: '../layouts/index',
-      routes: [
-        { path: '/', component: '../pages/index' },
-        { path: '/login', component: '../pages/login/index' },
-      ]
-    }
-  ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
@@ -33,6 +24,11 @@ const config: IConfig =  {
       },
     }],
   ],
+  alias: {
+    src: resolve(__dirname, 'src'),
+    components: resolve(__dirname, './src/components'),
+    models: resolve(__dirname, './src/models'),
+  }
 }
 
 export default config;

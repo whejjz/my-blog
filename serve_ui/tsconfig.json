@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "jsx": "react",
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "strict": true,
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "allowSyntheticDefaultImports": true
-  }
+      "strictNullChecks": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "jsx": "preserve",
+      "noUnusedParameters": true,
+      "noUnusedLocals": true,
+      "target": "es6",
+      "lib": [
+          "dom", 
+          "es7"
+      ]
+  },
+  "exclude": [
+      "node_modules",
+      "lib",
+      "es"
+  ]
 }
