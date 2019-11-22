@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "koa-session": "^5.12.3",
+    "koa2-cors": "^2.0.6",
     "nodemon": "^1.19.1"
   }
 }

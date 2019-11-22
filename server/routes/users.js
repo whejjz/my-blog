@@ -3,9 +3,10 @@ const UserController = require('../controllers/user')
 
 router.prefix('/users')
 
-router.get('/', UserController.detail)
+router.post('/', UserController.detail)
 
 router.get('/bar', function (ctx, next) {
+  console.log(ctx.request.body)
   ctx.body = 'this is a users/bar response'
 })
 

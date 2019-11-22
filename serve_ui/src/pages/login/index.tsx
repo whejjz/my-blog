@@ -21,7 +21,7 @@ const Login = (props: IProps) => {
     props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        axios.get('http://localhost:3000/users', {
+        axios.post('http://localhost:3000/users', {
           userName: values.username,
           password: values.password,
         })
