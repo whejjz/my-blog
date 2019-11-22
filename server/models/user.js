@@ -9,10 +9,11 @@ class UserModel {
    * @param id  文章ID
    * @returns {Promise<Model>}
    */
-  static async getUserDetail(id) {
+  static async getUserDetail(username, password) {
       return await User.findOne({
           where: {
-              id,
+            username,
+            password
           },
       })
   }

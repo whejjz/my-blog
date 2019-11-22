@@ -1,7 +1,8 @@
-import React, { PureComponent, Fragment } from 'react'
-import styles from './index.css';
-import { Button, Row, Form, Icon, Input, Checkbox } from 'antd'
+import React, { PureComponent, useState } from 'react'
+import { Button, Form, Icon, Input, Checkbox } from 'antd'
 import { connect } from 'dva'
+import styles from './index.less'
+import axios from 'axios'
 
 interface IProps {
   form: {
@@ -10,23 +11,34 @@ interface IProps {
   },
 }
 interface IState {
-  loading: string
+  loading: string,
+  count: number
 }
 
-class Login extends PureComponent<IProps, IState> {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+const Login = (props: IProps) => {
+  console.log(props)
+  function handleSubmit () {
+    props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        axios.get('http://localhost:3000/users', {
+          userName: values.username,
+          password: values.password,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+  const { getFieldDecorator } = props.form;
+  return (
+    <div className={styles.pagesLogin}>
+      <Form className="login-form">
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
@@ -56,14 +68,14 @@ class Login extends PureComponent<IProps, IState> {
           <a className="login-form-forgot" href="">
             Forgot password
           </a>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" onClick={handleSubmit} className="login-form-button">
             Log in
           </Button>
           Or <a href="">register now!</a>
         </Form.Item>
       </Form>
-    );
-  }
+    </div>
+  );
 }
 
 const LoginForm = Form.create()(Login);

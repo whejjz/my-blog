@@ -8,11 +8,18 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const sessionObj = require('./config/session')(app)
+
+// middlewares -- session
+
+const session = sessionObj.session
+app.keys = sessionObj.session_signed_key;
 
 // error handler
 onerror(app)
 
 // middlewares
+app.use(session);
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
