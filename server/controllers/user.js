@@ -1,3 +1,5 @@
+const store = require("../config/session").store;
+
 const UserModel = require('../models/user')
 class userController {
     /**
@@ -47,10 +49,9 @@ class userController {
      */
     static async detail(ctx) {
         let req = ctx.request.body;
-        console.log(req)
         const databaseUserName = req.userName;
         const databaseUserPasswd = req.password;
-
+        console.log(store.get(), 0)
         if (databaseUserName && databaseUserPasswd) {
           if (!ctx.session.logged) {  // 如果登录属性为undefined或者false，对应未登录和登录失败
             // 设置登录属性为false
@@ -60,12 +61,23 @@ class userController {
               // 取请求url解析后的参数对象，方便比对
               // 如?nickname=post修改&passwd=123解析为{nickname:"post修改",passwd:"123"}
               let data = await UserModel.getUserDetail(databaseUserName, databaseUserPasswd);
-              ctx.response.status = 200;
-              ctx.body = {
+              let res = {}
+              if(data) {
+                res = {
                   code: 200,
-                  msg: '查询成功',
-                  data
+                  msg: '登录成功',
+                }
+                ctx.session.logged = true;
+                console.log(ctx.session, 1)
+              } else {
+                res = {
+                  code: 10000,
+                  msg: '用户名或密码错误！',
+                }
               }
+              ctx.response.status = 200;
+              ctx.body = res
+              
             } catch (err) {
                 ctx.response.status = 412;
                 ctx.body = {

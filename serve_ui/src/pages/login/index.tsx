@@ -21,6 +21,8 @@ const Login = (props: IProps) => {
     props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        axios.defaults.headers.post['Content-Type'] = 
+'application/x-www-form-urlencoded;charset=UTF-8';
         axios.post('http://localhost:3000/users', {
           userName: values.username,
           password: values.password,
